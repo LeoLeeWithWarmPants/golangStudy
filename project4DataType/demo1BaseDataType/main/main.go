@@ -44,4 +44,22 @@ func main() {
 	//字符类型可以进行运算，相当于整数参与运算，应为字符都存在其对应的Unicode码
 	fmt.Printf("1 + char3 = %d\n", 1+char3)
 
+	//布尔类型
+	bbb := false
+	fmt.Printf("b=%t\n", bbb)                              // %t：true或false
+	fmt.Printf("bool need %d bytes\n", unsafe.Sizeof(bbb)) // bool占用一个字节
+
+	//字符串类型,go中的字符串是不可变的
+	var city string = "上海"
+	fmt.Printf("city:%s\n", city)
+	//字符串的拼接
+	name := "Leo Lee"
+	fmt.Printf("%s\n", city+name)
+	area := "浦东新区"
+	address := city + area + "陆家嘴"
+	fmt.Printf("address:%s\n", address)
+	//当拼接的字符串过长时，可以换行，但是+号要留在上一行，否则语法报错
+	str := "a" + "b" + "c" +
+		"d" + "e"
+	fmt.Printf("%s\n", str)
 }
