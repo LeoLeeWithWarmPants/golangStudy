@@ -24,7 +24,7 @@
   fmt.Printf("i8=%d\n", i8)
   ```
 
-![image-20210822212446151](..\static\img\image-20210822212446151.png)
+![image-20210822212446151](https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/static/img/image-20210822212446151.png?raw=true)
 
 # 标识符的基本使用
 
@@ -57,11 +57,11 @@ Golang对各种变量、方法、函数等命名时使用的字符序列称为�
 
 6. 不能以系统保留关键字作为标识符，如 break、if等关键字
 
-   ![image-20210822215207613](..\static\img\image-20210822215207613.png)
+   ![image-20210822215207613](https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/static/img/image-20210822215207613.png?raw=true)
 
    除了保留关键字之外，Golang还提供了36个预定标识符
 
-   ![image-20210822220755855](..\static\img\image-20210822220755855.png)
+   ![image-20210822220755855](https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/static/img/image-20210822220755855.png?raw=true)
 
 ## 标识符命名规范
 
