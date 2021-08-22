@@ -13,4 +13,17 @@ func main() {
 	fmt.Printf("10/4 = %g\n", 10.0/4)
 	fmt.Printf("10/4 = %g\n", 10/4.0)
 	fmt.Printf("10/4 = %g\n", float32(10)/4)
+
+	//++ --在Golang中只能独立使用，否则编译报错
+	var i8 int8 = 2
+	//不能直接使用 a := i8++
+	i8++
+	a := i8
+	fmt.Printf("a=%d\n", a)
+	//在Golang中没有 ++i --i
+	//甚至在if中都不可以使用
+	/*if i8++ > 0 {
+		// do something
+	}*/
+
 }
