@@ -26,4 +26,10 @@ func main() {
 		// do something
 	}*/
 
+	//多重赋值
+	var c = 20
+	var b = 30
+	c, b = b, c
+	fmt.Printf("c=%d, b=%d\n", c, b)
+
 }
