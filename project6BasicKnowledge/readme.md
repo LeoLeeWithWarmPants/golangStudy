@@ -69,6 +69,30 @@ Golang对各种变量、方法、函数等命名时使用的字符序列称为�
 2. 使用驼峰命令法
 3. Golang中没有访问权限关键字（Java中使用public、default、protected、private），如果变**量名、函数名、常量名首字母大写，那么就可以被其他包访问（public），如果首字母小写，则只能在本包中使用（private）**。
 
+# Golang中的进制
+
+- 二进制
+
+  - 在Golang中，不能直接使用二进制来表示一个整数，它沿用了C的特点，需要使用 %b 来格式化
+
+- 八进制
+
+  ```go
+  var x int8 = 012
+  fmt.Printf("x=%d", x)
+  //输出
+  //x=10
+  ```
+
+- 十六进制
+
+  ```go
+  var y int8 = 0x11
+  fmt.Printf("y=%d\n", y)
+  //输出
+  //y=17
+  ```
+
 # 运算符
 
 与其他语言一样，Golang中也有如下类型的运算符

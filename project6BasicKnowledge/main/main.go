@@ -32,4 +32,13 @@ func main() {
 	c, b = b, c
 	fmt.Printf("c=%d, b=%d\n", c, b)
 
+	//二进制
+	var i int8 = 10
+	fmt.Printf("i的二进制:%b\n", i)
+	//八进制
+	var x int8 = 012
+	fmt.Printf("x=%d\n", x)
+	//十六进制
+	var y int8 = 0x11
+	fmt.Printf("y=%d\n", y)
 }
