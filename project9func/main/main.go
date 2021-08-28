@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	u "golangStudyProject/project8ProcessControl/utils" //如果包名过长，可以设置包的别名，如别名u代替utils
+	u "golangStudyProject/project9func/utils" //如果包名过长，可以设置包的别名，如别名u代替utils
 )
 
 func main() {
