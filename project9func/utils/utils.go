@@ -25,3 +25,8 @@ func Calculate(num1 float64, num2 float64, option byte) float64 {
 	}
 	return result
 }
+
+// Caculate 多个返回值，如果想忽略某个返回值可以使用_作为占位符
+func Caculate(num1 float64, num2 float64) (float64, float64) {
+	return num1 + num2, num1 * num2
+}
