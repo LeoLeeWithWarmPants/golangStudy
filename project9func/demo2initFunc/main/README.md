@@ -43,3 +43,6 @@ func main() {
 ```
 
 每一个go文件中的init函数在该文件被引用的时候都会执行，如
+
+[哈哈哈]: https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/project9func/demo2initFunc/main/main.go	"这个示例"
+
