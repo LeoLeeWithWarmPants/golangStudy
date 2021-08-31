@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	u "golangStudyProject/project9func/utils" //如果包名过长，可以设置包的别名，如别名u代替utils
+	u "golangStudyProject/project9func/demo1func/utils" //如果包名过长，可以设置包的别名，如别名u代替utils
 )
 
 //需要注意的是，在golang中，基本数据类型和数组都是值传递，即函数内改变形参不影响函数外的基本数据类型和数组的值
