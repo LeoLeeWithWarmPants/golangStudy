@@ -42,7 +42,11 @@ func main() {
 }
 ```
 
-每一个go文件中的init函数在该文件被引用的时候都会执行，如
+**每一个go文件中的init函数在该文件被引用的时候都会执行**，如[这个示例](https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/project9func/demo2initFunc/main/main.go)中main函数中引用了其他包中的全局变量，这些变量被自己所在go文件中的init函数初始化。
 
-[哈哈哈]: https://github.com/LeoLeeWithWarmPants/golangStudy/blob/main/project9func/demo2initFunc/main/main.go	"这个示例"
+执行顺序为：
+
+1. 按照引用链，首先执行被引用go文件中的全局变量定义，其次执行该文件中的init函数
+2. 之后执行引用文件的中全局变量定义，之后执行该文件中的init函数，如果当前文件仍然被其他文件应用，按照引用链继续执行。
+3. 直到main函数所在文件中，仍然是先执行全局变量的初始化，之后是当前文件的init函数。
 
