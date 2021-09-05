@@ -24,6 +24,9 @@ func main() {
 	fmt.Println(dateStr)
 	//使用Time.Format，golang作者比较任性，使用2006-01-02 15:04:05这个时间作为yyyy-MM-dd HH:mm:ss使用
 	fmt.Println(now.Format("2006-01-02 15:04:05"))
+	//字符串转时间类型
+	t, _ := time.Parse("2006-01-02 15:04:05", "2021-09-05 12:17:33")
+	fmt.Printf("字符串转时间:%d-%d-%d %d:%d:%d\n", t.Year(), t.Month(), t.Day(), t.Hour(), t.Minute(), t.Second())
 
 	//时间常量
 	for i := 0; i < 5; i++ {
