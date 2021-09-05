@@ -32,12 +32,12 @@ func main() {
 		}
 	}
 
-	//func Atoi(s string) (i int, err error)，字符串转数字
-	i, error := strconv.Atoi("123a")
-	if error == nil {
+	//func Atoi(s string) (i int, err err)，字符串转数字
+	i, err := strconv.Atoi("123a")
+	if err == nil {
 		fmt.Printf("i=%d\n", i)
 	} else {
-		fmt.Printf("error=%v\n", error)
+		fmt.Printf("err=%v\n", err)
 	}
 
 	//func Itoa(i int) string，整数转字符串
@@ -61,7 +61,7 @@ func main() {
 	fmt.Printf("十六进制v16=%s\n", v16)
 
 	//查找字符串中是否包含另一个字符串
-	var b bool = strings.Contains("123456", "234")
+	var b = strings.Contains("123456", "234")
 	fmt.Printf("123456 is contains 234:%t\n", b)
 
 	//统计一个字符串在另一个字符串中一共出现的次数
