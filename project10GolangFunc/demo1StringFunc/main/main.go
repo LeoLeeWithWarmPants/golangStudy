@@ -78,4 +78,37 @@ func main() {
 	string3 := "eo"
 	string4 := "Hello LeoLee"
 	fmt.Printf("eo在%d的位置第一次出现\n", strings.Index(string4, string3))
+
+	//返回某个字符串在另一个字符串中第一次出现的位置
+	string5 := "eo"
+	string6 := "Hello LeoLee LeoLee LeoLee"
+	fmt.Printf("eo在%d的位置最后一次出现\n", strings.LastIndex(string6, string5))
+
+	//字符串的替换
+	string7 := "哈哈哈哈呵呵呵哈哈哈哈"
+	string8 := "嘻嘻嘻"
+	fmt.Println(strings.Replace(string7, "呵呵呵", string8, -1))
+
+	//分割字符串
+	string9 := "a,b,c,d,e,f,g"
+	strArray := strings.Split(string9, ",")
+	for i := 0; i < len(strArray); i++ {
+		fmt.Println(strArray[i])
+	}
+
+	//大小写转换
+	string10 := "Golang LeoLee"
+	fmt.Println(strings.ToUpper(string10))
+	fmt.Println(strings.ToLower(string10))
+
+	//去除左右两边的空格
+	string11 := "   哈哈哈哈   "
+	fmt.Printf("去左右两边的空格:%s\n", strings.TrimSpace(string11))
+	//去除左右两边指定的字符
+	fmt.Printf("去除左右两边指定的字符:%s\n", strings.Trim("! hello ! ", " !"))
+
+	//判断是否以指定的字符串结尾
+	fmt.Println(strings.HasSuffix("xxx.jpg", "jpg"))
+	//判断是否以指定的字符串开头
+	fmt.Println(strings.HasPrefix("xxx.jpg", "xxx."))
 }
