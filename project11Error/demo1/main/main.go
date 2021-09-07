@@ -7,7 +7,7 @@ func test() {
 	defer func() {
 		err := recover() //内建函数，捕获异常
 		if err != nil {
-			fmt.Printf("err=%v/n", err)
+			fmt.Printf("err=%v\n", err)
 		}
 	}()
 	//产生运行时异常
