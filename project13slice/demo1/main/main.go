@@ -7,9 +7,24 @@ const length int = 5
 var intArray = [length]int{1, 3, 5, 7, 9}
 
 //从一个数组中获取一个切片
+//通过make创建的切片顶层的数组只能通过切片来操作，该数组没有其他的引用
 func getSliceFromArray(array [length]int) []int {
 	slice := array[1:3] // 1:3 代表从数组下标为1的元素开始取值，到下标为3的元素位置，不包含3
 	return slice
+}
+
+//通过make创建一个切片
+func getSliceByMake() []int {
+	var slice3 []int = make([]int, 4, 8)
+	fmt.Printf("slice3 length=%d, capcity=%d\n", len(slice3), cap(slice3))
+	return slice3
+}
+
+//创建切片时，初始化切片引用的数组
+func getSliceByInitArray() []int {
+	var slice4 []int = []int{1, 3, 5, 7, 9}
+	fmt.Printf("slice4 length=%d, capcity=%d\n", len(slice4), cap(slice4))
+	return slice4
 }
 
 func main() {
@@ -31,4 +46,12 @@ func main() {
 	slice2[0] = 28
 	fmt.Printf("after slice2 changed,slice2=%v\n", slice2)
 	fmt.Printf("after slice2 changed,intArray2=%v\n", intArray2)
+
+	//通过make创建切片
+	slice3 := getSliceByMake()
+	fmt.Printf("slice3:%v, slice3 memory address:%p\n", slice3, &slice3)
+
+	//创建切片时，初始化切片引用的数组
+	slice4 := getSliceByInitArray()
+	fmt.Printf("slice4=%v\n", slice4)
 }
