@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 const length int = 5
 
@@ -55,6 +58,20 @@ func sliceTraverseByForRange(slice []int) {
 	}
 }
 
+//测试切片扩容
+func testDilatationByAppend(slice1 []int, slice2 []int, args ...int) []int {
+	if slice1 == nil {
+		panic(errors.New("被扩容的切片不能为空"))
+	}
+	if slice2 != nil {
+		slice1 = append(slice1, slice2...)
+	}
+	if args != nil && len(args) > 0 {
+		slice1 = append(slice1, args...)
+	}
+	return slice1
+}
+
 func main() {
 	//从一个数组中获取一个切片
 	slice1 := getSliceFromArray(intArray)
@@ -95,4 +112,21 @@ func main() {
 	fmt.Printf("slice5=%v\n", slice5)
 	slice5[0] = 33
 	fmt.Printf("after slice5 changed, slice4=%v\n", slice4) //说明切片slice4产生的切片slice5，slice4和slice5公用一个底层的数组
+
+	//切片扩容测试
+	intArray3 := [...]int{1, 2}
+	slice6 := intArray3[:]
+	fmt.Printf("slice6=%v, length=%d, capcity=%d, address=%p\n", slice6, len(slice6), cap(slice6), &slice6)
+	slice7 := []int{3, 4, 5}
+	slice6 = testDilatationByAppend(slice6, slice7)
+	//由此可以看到切片在append元素之后，capcity增加了，虽然切片的地址没有变化，但是由数组声明后长度不可变可知，底层的数据肯定不是intArray3了
+	fmt.Printf("slice6=%v, length=%d, capcity=%d, address=%p\n", slice6, len(slice6), cap(slice6), &slice6)
+
+	//切片的拷贝
+	slice8 := []int{1, 2, 3}
+	slice9 := make([]int, 6)
+	copyLength := copy(slice9, slice8)
+	fmt.Printf("copyLength=%d\n", copyLength)
+	fmt.Printf("slice8=%v\n", slice8)
+	fmt.Printf("slice9=%v\n", slice9)
 }
