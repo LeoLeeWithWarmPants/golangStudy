@@ -9,7 +9,7 @@ const length = len(myArray)
 //冒泡排序
 func bubbleSort(array *[length]int) {
 	var temp int
-	for j := 0; j < length; j++ {
+	for j := 0; j < length-1; j++ {
 		for i := 0; i < length-1; i++ {
 			if array[i] > array[i+1] {
 				temp = array[i]
