@@ -22,6 +22,30 @@ func changePerson(p Person) {
 }
 
 func main() {
+	//struct的四种声明方式
+	//方式一：直接声明
+	var s Student
+	fmt.Println("s=", s)
+
+	//方式二：类型推断+初始化
+	pp := Person{Id: 20001, Name: "LeoLee", Age: 26}
+	s1 := Student{baseInfo: pp}
+	fmt.Println("s1=", s1)
+
+	//方式三：内建函数new，返回结构体指针
+	var s2 *Student = new(Student)
+	//赋值方法：获取指针的值（*s2），然后再进行赋值
+	(*s2).baseInfo = pp
+	//为了方便程序员，golang的作者也允许如下写法，隐式的对指针s2进行取值运算（*），再进行赋值。属于语法糖
+	s2.array[0] = 1
+	s2.array[1] = 2
+	fmt.Printf("s2=%v, s2 type=%T\n", s2, s2)
+
+	//方式四：使用&符，返回结构体指针
+	var s3 *Student = &Student{baseInfo: pp}
+	(*s3).array[0] = 1
+	fmt.Printf("s3=%v, s3 type=%T\n", s3, s3)
+
 	//定义Person类型的变量stu1
 	var p1 Person
 	fmt.Printf("p1.Id=%d,p1.Name=%s,p1.Age=%d\n", p1.Id, p1.Name, p1.Age) //初始化变量完成后，各个字段为类型的默认值
