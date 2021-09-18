@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+//结构体的所有字段在内存里是连续的，这样的好处是，完全可以通过某个[字段的地址]操作结构体中的所有属性，且速度很快
+
 //struct定义
 type Person struct {
 	Id   int64
