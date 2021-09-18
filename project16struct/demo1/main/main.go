@@ -19,6 +19,18 @@ type Student struct {
 	map1     map[string]int
 }
 
+type A struct {
+	Num int
+}
+
+type B struct {
+	Num int
+}
+
+//结构体进行type重新定义，相当于取别名
+type AA A
+type Integer int //基本数据类型也可以
+
 func changePerson(p Person) {
 	p.Name = "Lydia"
 }
@@ -95,4 +107,16 @@ func main() {
 	}
 	stu1.baseInfo.Name = "LeoLee"
 	fmt.Println(stu1)
+
+	//结构体之间的转换
+	var a A
+	var b B
+	a = A(b) //两个结构体之间字段数量、字段类型、字段名称一致，可以强制转换
+	fmt.Println(a, b)
+	//结构体进行type重新定义，相当于取别名
+	var integer Integer = 10
+	var i int = 20
+	i = int(integer) //并不能直接i = j,虽然本质上都是int，但是golang认为并不是同一种数据类型了，还是需要强转
+	fmt.Println(integer, i)
+
 }
