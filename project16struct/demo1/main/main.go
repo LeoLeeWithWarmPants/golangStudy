@@ -53,7 +53,7 @@ func main() {
 	p1.Name = "LeoLee"
 	p1.Age = 26
 	fmt.Printf("p1.Id=%d,p1.Name=%s,p1.Age=%d\n", p1.Id, p1.Name, p1.Age)
-	//struct是值类型，函数内的修改无法影响函数外的值。
+	//struct是值传递类型，函数内的修改无法影响函数外的值。
 	//需要进行指针才可以改变原有变量的数据
 	changePerson(p1)
 	fmt.Printf("p1.Id=%d,p1.Name=%s,p1.Age=%d\n", p1.Id, p1.Name, p1.Age)
