@@ -1,0 +1,33 @@
+package main
+
+import (
+	"golangStudyProject/project15OOP/demo1extends/models"
+)
+
+func main() {
+	p1 := &models.Person{Name: "WangWu", Age: 18}
+	p1.ShowPersonInfo()
+
+	stu1 := &models.Student{}
+	stu1.Person.Name = "ZhangSan"
+	stu1.Person.Age = 6
+	stu1.SetStuScore(80)
+	stu1.ShowPersonInfo()
+	stu1.ShowStuInfo()
+
+	mss1 := new(models.MiddleSchoolStudent)
+	(*mss1).Student.Name = "LeoLee"
+	(*mss1).Student.Age = 26
+	mss1.Test()
+	mss1.SetStuScore(99)
+	stu1.ShowPersonInfo()
+	mss1.ShowStuInfo()
+
+	u1 := new(models.Undergraduate)
+	(*u1).Student.Name = "Lydia"
+	(*u1).Student.Age = 29
+	u1.Test()
+	u1.SetStuScore(90)
+	stu1.ShowPersonInfo()
+	u1.ShowStuInfo()
+}
