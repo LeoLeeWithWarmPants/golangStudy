@@ -16,6 +16,10 @@ type Student struct {
 	score  int
 }
 
+func (stu *Student) getScore() int {
+	return stu.score
+}
+
 // ShowStuInfo 打印学生信息
 func (stu *Student) ShowStuInfo() {
 	fmt.Printf("stu.Name:%s,stu.Age:%d,stu.Score:%d\n", (*stu).Name, (*stu).Age, (*stu).score)
@@ -40,4 +44,13 @@ type Undergraduate struct {
 
 func (stu *Undergraduate) Test() {
 	fmt.Println("大学生考试...")
+}
+
+//在同一个package中，struct可以使用嵌套struct中所有的字段和方法，不论是首字母大写还是小写。
+func GetScore1(undergraduate *Undergraduate) int {
+	return undergraduate.score
+}
+
+func GetScore2(undergraduate *Undergraduate) int {
+	return undergraduate.Student.getScore()
 }

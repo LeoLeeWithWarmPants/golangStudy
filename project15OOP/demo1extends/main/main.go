@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"golangStudyProject/project15OOP/demo1extends/models"
 )
 
+//父struct的方法，可以被子struct使用
 func main() {
 	p1 := &models.Person{Name: "WangWu", Age: 18}
 	p1.ShowPersonInfo()
@@ -30,4 +32,14 @@ func main() {
 	u1.SetStuScore(90)
 	stu1.ShowPersonInfo()
 	u1.ShowStuInfo()
+
+	//在同一个package中，struct可以使用嵌套struct中所有的字段和方法，不论是首字母大写还是小写。
+	mss2 := new(models.Undergraduate)
+	mss2.SetStuScore(70)
+	var score int
+	score = models.GetScore1(mss2)
+	fmt.Println("score=", score)
+	mss2.SetStuScore(60)
+	score = models.GetScore2(mss2)
+	fmt.Println("score=", score)
 }
