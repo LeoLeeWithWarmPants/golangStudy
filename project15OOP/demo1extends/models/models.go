@@ -54,7 +54,12 @@ type Book struct {
 }
 
 type Phone struct {
-	Price float64
+	Price  float64
+	*Brand //内嵌结构体指针
+}
+
+type Brand struct {
+	Name string
 }
 
 //在同一个package中，struct可以使用嵌套struct中所有的字段和方法，不论是首字母大写还是小写。

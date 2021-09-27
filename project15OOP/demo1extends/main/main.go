@@ -63,7 +63,10 @@ func main() {
 		},
 		models.Phone{
 			float64(7000.05),
+			//内嵌结构体指针
+			&models.Brand{Name: "apple"}, //或者是&models.Brand{"apple"}
 		},
 	}
 	fmt.Printf("p3=%v\n", *p3)
+	fmt.Printf("p3.book.brand=%v\n", (*(*p3).Phone.Brand).Name)
 }
