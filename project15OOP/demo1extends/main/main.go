@@ -42,4 +42,28 @@ func main() {
 	mss2.SetStuScore(60)
 	score = models.GetScore2(mss2)
 	fmt.Println("score=", score)
+
+	//嵌套结构体创建实例同时进行结构体赋值
+	p2 := &models.Person{
+		Name: "Tony",
+		Age:  50,
+		Book: models.Book{
+			Name:  "《Golang从入门到放弃》",
+			Price: float64(35.35),
+		},
+		//models.Phone{Price: float64(7000.05)},//如果使用k-v方式，那么匿名结构体就无法在初始化时赋值
+	}
+	fmt.Printf("p2=%v\n", *p2)
+	p3 := &models.Person{
+		"KingKong",
+		50,
+		models.Book{
+			"《Golang从入门到放弃》",
+			float64(35.35),
+		},
+		models.Phone{
+			float64(7000.05),
+		},
+	}
+	fmt.Printf("p3=%v\n", *p3)
 }

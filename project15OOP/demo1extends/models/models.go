@@ -5,6 +5,8 @@ import "fmt"
 type Person struct {
 	Name string
 	Age  int
+	Book Book //有名结构体，访问其字段的时候需要使用其名称作出具体的调用，如：Person.book.Name
+	Phone
 }
 
 func (p *Person) ShowPersonInfo() {
@@ -44,6 +46,15 @@ type Undergraduate struct {
 
 func (stu *Undergraduate) Test() {
 	fmt.Println("大学生考试...")
+}
+
+type Book struct {
+	Name  string
+	Price float64
+}
+
+type Phone struct {
+	Price float64
 }
 
 //在同一个package中，struct可以使用嵌套struct中所有的字段和方法，不论是首字母大写还是小写。
