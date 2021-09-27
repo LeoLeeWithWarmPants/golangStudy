@@ -62,6 +62,18 @@ type Brand struct {
 	Name string
 }
 
+//结构体中嵌入匿名基本数据类型
+type Computer struct {
+	string
+	*int
+}
+
+//结构体中嵌入匿名基本数据类型
+func (computer *Computer) Init(name string, cpuNum *int) {
+	(*computer).string = name
+	(*computer).int = cpuNum
+}
+
 //在同一个package中，struct可以使用嵌套struct中所有的字段和方法，不论是首字母大写还是小写。
 func GetScore1(undergraduate *Undergraduate) int {
 	return undergraduate.score

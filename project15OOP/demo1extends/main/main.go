@@ -69,4 +69,10 @@ func main() {
 	}
 	fmt.Printf("p3=%v\n", *p3)
 	fmt.Printf("p3.book.brand=%v\n", (*(*p3).Phone.Brand).Name)
+
+	//结构体中嵌入匿名基本数据类型
+	cpuNum := 16
+	computer1 := &models.Computer{}
+	computer1.Init("Alienware", &cpuNum)
+	fmt.Printf("computer1.Name=%s\n", computer1)
 }
