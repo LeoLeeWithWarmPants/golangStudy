@@ -67,6 +67,11 @@ func PersonDoSomething(personInterface PersonInterface) {
 	personInterface.Study()
 }
 
+func DemoInterfaceTest(demoInterface DemoInterface, i int) int {
+	resultInt := demoInterface.AutoIncrement(i)
+	return resultInt
+}
+
 func main() {
 	p1 := models.Person{Name: "Lydia"}
 	p2 := models.Person{Name: "LeoLee"}
@@ -78,6 +83,6 @@ func main() {
 
 	//接口定义带参有返回值
 	d := new(Demo)
-	i := d.AutoIncrement(2)
+	i := DemoInterfaceTest(d, 2)
 	fmt.Printf("i=%d\n", i)
 }
