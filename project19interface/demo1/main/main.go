@@ -17,6 +17,10 @@ type DemoInterface interface {
 	AutoIncrement(i int) int
 }
 
+//空接口
+type EmptyInterface interface {
+}
+
 type Demo struct {
 }
 
@@ -73,6 +77,11 @@ func DemoInterfaceTest(demoInterface DemoInterface, i int) int {
 	return resultInt
 }
 
+//空接口证明方法
+func EmptyInterfaceTest(emptyInterface EmptyInterface) {
+	fmt.Printf("empty interface type=%T\n", emptyInterface)
+}
+
 func main() {
 	p1 := models.Person{Name: "Lydia"}
 	p2 := models.Person{Name: "LeoLee"}
@@ -86,4 +95,12 @@ func main() {
 	d := new(Demo)
 	i := DemoInterfaceTest(d, 2)
 	fmt.Printf("i=%d\n", i)
+
+	//空接口：所有类型都实现了空接口
+	EmptyInterfaceTest(p1)
+	EmptyInterfaceTest(p2)
+	EmptyInterfaceTest(stu)
+	EmptyInterfaceTest(pro)
+	EmptyInterfaceTest(d)
+	EmptyInterfaceTest(i)
 }
