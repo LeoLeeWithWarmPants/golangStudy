@@ -13,6 +13,18 @@ type PersonInterface interface {
 	Study()     //学习
 }
 
+type DemoInterface interface {
+	AutoIncrement(i int) int
+}
+
+type Demo struct {
+}
+
+func (d Demo) AutoIncrement(i int) int {
+	i++
+	return i
+}
+
 //定义结构体Student
 type Student struct {
 	models.Person
@@ -63,4 +75,9 @@ func main() {
 	//将接口的实现传入函数中，函数中调用接口的具体实现方法
 	PersonDoSomething(stu)
 	PersonDoSomething(pro)
+
+	//接口定义带参有返回值
+	d := new(Demo)
+	i := d.AutoIncrement(2)
+	fmt.Printf("i=%d\n", i)
 }
