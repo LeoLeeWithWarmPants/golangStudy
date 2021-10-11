@@ -62,6 +62,7 @@ func (pro Programmer) Study() {
 
 //调用接口的方法
 func PersonDoSomething(personInterface PersonInterface) {
+	fmt.Printf("interface type=%T\n", personInterface)
 	personInterface.TakeMetro()
 	personInterface.DoWork()
 	personInterface.Study()
