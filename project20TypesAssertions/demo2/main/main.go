@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"golangStudyProject/project15OOP/demo1extends/models"
+)
 
 //通过类型断言判断变量的类型
 func TypeOf(items ...interface{}) {
@@ -13,6 +16,10 @@ func TypeOf(items ...interface{}) {
 		case float64:
 			myPrint(idx, e)
 		case int, int16, int32, int64:
+			myPrint(idx, e)
+		case models.Person:
+			myPrint(idx, e)
+		case *models.Person:
 			myPrint(idx, e)
 		default:
 			fmt.Println("暂不支持解析的数据类型")
@@ -30,5 +37,7 @@ func main() {
 	param3 := true
 	param4 := 1.234
 	var param5 int64 = 30
-	TypeOf(param1, param2, param3, param4, param5)
+	param6 := models.Person{Name: "LeoLee"}
+	param7 := &models.Person{Name: "Lydia"}
+	TypeOf(param1, param2, param3, param4, param5, param6, param7)
 }
