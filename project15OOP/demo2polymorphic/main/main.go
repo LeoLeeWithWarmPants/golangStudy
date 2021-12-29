@@ -19,6 +19,11 @@ func (phone Phone) Stop() {
 	fmt.Println("手机拔出USB")
 }
 
+//可以存在类型私有的方法
+func (phone Phone) Call() {
+	fmt.Println("拨打电话")
+}
+
 type Ipad struct {
 	name string
 }
