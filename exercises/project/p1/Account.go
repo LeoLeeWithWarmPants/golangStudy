@@ -31,19 +31,46 @@ func PrintFinanceDetail0() {
 	}
 }
 
+func scanFinanceDetail(optionType int8) (float64, string) {
+	var amount float64
+	var remark string
+	if optionType == 1 {
+		fmt.Println("请输入本次收入金额")
+	} else if optionType == 2 {
+		fmt.Println("请输入本次支出金额")
+	}
+	fmt.Scanln(&amount)
+	if optionType == 1 {
+		fmt.Println("请输入本次收入备注")
+	} else if optionType == 2 {
+		fmt.Println("请输入本次支出备注")
+	}
+	fmt.Scanln(&remark)
+	return amount, remark
+}
+
 func Income() {
 	var incomeAmount float64
 	var remark string
 	PrintTitle(constant.MenuItemNames[1])
-	fmt.Println("请输入本次收入金额")
-	fmt.Scanln(&incomeAmount)
-	fmt.Println("请输入本次收入备注")
-	fmt.Scanln(&remark)
+
+	incomeAmount, remark = scanFinanceDetail(1)
 
 	fd := models.FinanceDetail{Type: 1, Amount: incomeAmount, Remark: remark}
-	income0(fd)
+	accountOption(fd)
 }
 
-func income0(ao models.AccountOption) {
+func Expenditure() {
+	var incomeAmount float64
+	var remark string
+	PrintTitle(constant.MenuItemNames[2])
+
+	incomeAmount, remark = scanFinanceDetail(2)
+
+	fd := models.FinanceDetail{Type: 2, Amount: incomeAmount, Remark: remark}
+	accountOption(fd)
+}
+
+func accountOption(ao models.AccountOption) {
 	ao.DoOption(account)
 }

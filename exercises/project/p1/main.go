@@ -30,7 +30,7 @@ func chooseMenu(key string) bool {
 	case "2":
 		Income()
 	case "3":
-		PrintTitle(constant.MenuItemNames[2])
+		Expenditure()
 	case "4":
 		PrintTitle(constant.MenuItemNames[3])
 		result = false
