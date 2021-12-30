@@ -54,6 +54,9 @@ func (financeDetail FinanceDetail) DoOption(account *Account) {
 	case 1:
 		account.Amount += financeDetail.Amount
 	case 2:
+		if (account.Amount - financeDetail.Amount) < 0 {
+			fmt.Println("账户余额不足以支出")
+		}
 		account.Amount -= financeDetail.Amount
 	}
 	financeDetail.CurrentAmount = account.Amount
