@@ -26,9 +26,9 @@ func chooseMenu(key string) bool {
 	result := true
 	switch key {
 	case "1":
-		PrintTitle(constant.MenuItemNames[0])
+		PrintFinanceDetail(constant.MenuItemNames[0])
 	case "2":
-		PrintTitle(constant.MenuItemNames[1])
+		Income()
 	case "3":
 		PrintTitle(constant.MenuItemNames[2])
 	case "4":
