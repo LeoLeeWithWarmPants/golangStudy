@@ -2,10 +2,10 @@ package models
 
 type Menu struct {
 	Title     string
-	menuItems []MenuItem
+	MenuItems []MenuItem
 }
 
 type MenuItem struct {
-	rank     int
-	itemName string
+	Rank     int
+	ItemName string
 }
