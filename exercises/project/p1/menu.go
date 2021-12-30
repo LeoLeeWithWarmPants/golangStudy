@@ -8,7 +8,7 @@ import (
 
 var menu *models.Menu
 
-func buildMenu() {
+func buildMainMenu() {
 	if menu == nil {
 		menu = new(models.Menu)
 	}
@@ -22,20 +22,20 @@ func buildMenu() {
 	}
 }
 
-func PrintMenuText(menu *models.Menu) {
-	fmt.Printf("%s%s%s\n", constant.CutOffLine, menu.Title, constant.CutOffLine)
+func printMainMenuText(menu *models.Menu) {
+	PrintTitle(menu.Title)
 	if menu.MenuItems != nil && len(menu.MenuItems) > 0 {
 		for _, ele := range menu.MenuItems {
-			fmt.Printf("%s%d.%s\n", constant.Spaces, ele.Rank, ele.ItemName)
+			fmt.Printf("%s%d.%s\n", constant.Spaces1+constant.Spaces2, ele.Rank, ele.ItemName)
 		}
 	}
 }
 
-func PrintMenu() {
-	buildMenu()
-	PrintMenuText(menu)
+func PrintTitle(menuItemName string) {
+	fmt.Printf("%s%s%s\n", constant.CutOffLine, menuItemName, constant.CutOffLine)
 }
 
-func main() {
-	PrintMenu()
+func PrintMainMenu() {
+	buildMainMenu()
+	printMainMenuText(menu)
 }
