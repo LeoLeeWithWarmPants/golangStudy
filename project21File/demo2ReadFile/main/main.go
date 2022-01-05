@@ -26,10 +26,12 @@ func readFile(filePath string) {
 	file := openFile(filePath)
 	defer file.Close() //当函数执行完成后及时关闭file对象，防止内存泄漏
 
-	printFileStr(getReader(file))
+	reader := getReader(file)
+	printFileByte(reader)
 	fmt.Println("--------------------------------")
-	printFileByte(getReader(file))
+	printFileStr(reader) //?????不知道为何，重复读取同一个reader第二次就读取不到任何东西，哪怕是重新bufio.NewReader(file)产生新的reader也不行
 	fmt.Println("--------------------------------")
+
 }
 
 func printFileStr(reader *bufio.Reader) {
