@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"os"
 )
 
@@ -26,6 +27,9 @@ func readFile(filePath string) {
 	defer file.Close() //当函数执行完成后及时关闭file对象，防止内存泄漏
 
 	printFileStr(getReader(file))
+	fmt.Println("--------------------------------")
+	printFileByte(getReader(file))
+	fmt.Println("--------------------------------")
 }
 
 func printFileStr(reader *bufio.Reader) {
@@ -43,6 +47,29 @@ func printFileStr(reader *bufio.Reader) {
 	}
 }
 
+func printFileByte(reader *bufio.Reader) {
+	var byteArr = make([]byte, 4, 8)
+	for {
+		byteNum, err := reader.Read(byteArr)
+		if byteNum == 0 {
+			break
+		}
+		if err != nil {
+			fmt.Printf("reader read str err:%v\n", err)
+		}
+		fmt.Printf("%s", string(byteArr))
+	}
+}
+
 func main() {
 	readFile("C:\\Users\\WEIMOB\\Desktop\\fileTestForGolang.txt")
+
+	//小文本可以直接全量读取
+	content, err := ioutil.ReadFile("C:\\Users\\WEIMOB\\Desktop\\fileTestForGolang.txt")
+	if err != nil {
+		fmt.Printf("file read err:%v\n", err)
+	}
+	fmt.Printf("%v\n", string(content))
+	fmt.Println("--------------------------------")
+	fmt.Printf("%v\n", string(content))
 }
