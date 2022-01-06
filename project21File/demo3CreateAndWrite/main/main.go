@@ -39,8 +39,35 @@ func createAndWriteFile(fileFullPath string, content string) {
 	writeFile(file, content)
 }
 
+//清空文件
+func clearFileContent(filePath string) {
+	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_TRUNC, 777)
+	if err != nil {
+		fmt.Printf("openFile failed, err:%v\n", err)
+		panic(err)
+	}
+	defer file.Close()
+}
+
+//追加数据
+func appendContent(filePath string, appendContent string) {
+	file, err := os.OpenFile(filePath, os.O_WRONLY|os.O_APPEND, 777)
+	if err != nil {
+		fmt.Printf("openFile failed, err:%v\n", err)
+		panic(err)
+	}
+	defer file.Close()
+	writer := getWriter(file)
+	writer.WriteString(appendContent)
+	writer.Flush()
+}
+
 func main() {
 	createAndWriteFile("C:\\leolee\\development\\workspace\\personal\\go\\src\\golangStudyProject\\project21File\\demo3CreateAndWrite\\main\\test.txt", "LeoLee")
 	// ./并不是代表当前文件所在路径的相对路径，还是代表了goPath的相对路径
 	createAndWriteFile(".\\project21File\\demo3CreateAndWrite\\main\\test2.txt", "Lydia")
+
+	appendContent("./project21File/demo3CreateAndWrite/main/test2.txt", "current line by append option")
+
+	//clearFileContent("./project21File/demo3CreateAndWrite/main/test2.txt")
 }
