@@ -64,7 +64,8 @@ func printFileByte(reader *bufio.Reader) {
 }
 
 func main() {
-	readFile("C:\\Users\\WEIMOB\\Desktop\\fileTestForGolang.txt")
+	// readFile("C:\\Users\\WEIMOB\\Desktop\\fileTestForGolang.txt") //绝对路径
+	readFile("./project21File/demo2ReadFile/main/fileTestForGolang.txt")
 
 	//小文本可以直接全量读取
 	content, err := ioutil.ReadFile("C:\\Users\\WEIMOB\\Desktop\\fileTestForGolang.txt")
