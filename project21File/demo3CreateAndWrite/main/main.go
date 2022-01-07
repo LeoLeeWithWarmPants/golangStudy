@@ -4,8 +4,26 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"reflect"
 	"strconv"
 )
+
+//----------判断文件或者文件夹是否存在----------
+
+func checkFilePathExists(filePath string) bool {
+	//通过获取指定路径的 info 来判断文件或者文件夹是否存在，如果返回*PathError，代表没有该文件或者文件夹
+	fileInfo, err := os.Stat(filePath)
+	fmt.Printf("path[%s] info: %v\n", filePath, fileInfo)
+	if err != nil {
+		if reflect.TypeOf(err).Kind() == reflect.TypeOf(new(os.PathError)).Kind() {
+			fmt.Printf("[%s] is not exists\n", filePath)
+		} else {
+			fmt.Printf("check file path exists err: %v\n", err)
+		}
+		return false
+	}
+	return true
+}
 
 //----------创建文件并写入数据----------
 
@@ -70,4 +88,6 @@ func main() {
 	appendContent("./project21File/demo3CreateAndWrite/main/test2.txt", "current line by append option")
 
 	//clearFileContent("./project21File/demo3CreateAndWrite/main/test2.txt")
+
+	fmt.Printf("is exists: %t\n", checkFilePathExists("./project21File/demo3CreateAndWrite/main/test2.txt"))
 }
