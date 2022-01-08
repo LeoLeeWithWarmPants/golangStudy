@@ -18,3 +18,26 @@ arg[4]:c
 arg[5]:d
 ```
 
+这种方式的缺点就是没有参数名，命令行可读性较差。
+
+## **flag.xxxVar**
+
+使用flag包中的xxxVar等函数，可以指定参数名获取命令行参数，将获取到的参数值通过变量的指针进行赋值，需要注意一定要执行。
+
+同时，支持指定命令参数的默认值
+
+```go
+flag.Parse()
+```
+
+运行结果如下：
+
+```
+PS C:\leolee\development\workspace\personal\go\src\golangStudyProject\project22CommandLineParam\demo2\main> .\TestGetCommandLineParam.exe
+LeoLee 123456 127.0.0.1 3306
+PS C:\leolee\development\workspace\personal\go\src\golangStudyProject\project22CommandLineParam\demo2\main> .\TestGetCommandLineParam.exe -u LeoLee2 -p 654321 -h 127.0.0.2 -port 6379
+LeoLee2 654321 127.0.0.2 6379
+PS C:\leolee\development\workspace\personal\go\src\golangStudyProject\project22CommandLineParam\demo2\main>
+
+```
+
