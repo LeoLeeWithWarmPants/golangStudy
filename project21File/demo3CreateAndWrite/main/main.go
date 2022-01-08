@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"reflect"
 	"strconv"
@@ -80,14 +81,33 @@ func appendContent(filePath string, appendContent string) {
 	writer.Flush()
 }
 
-func main() {
-	createAndWriteFile("C:\\leolee\\development\\workspace\\personal\\go\\src\\golangStudyProject\\project21File\\demo3CreateAndWrite\\main\\test.txt", "LeoLee")
-	// ./并不是代表当前文件所在路径的相对路径，还是代表了goPath的相对路径
-	createAndWriteFile(".\\project21File\\demo3CreateAndWrite\\main\\test2.txt", "Lydia")
+//拷贝文件
+func copyFile(sourceFile string, targetFile string) {
+	//打开源文件，生成对应的file句柄
+	sf, err := os.Open(sourceFile)
+	if err != nil {
+		fmt.Printf("open file err:%v\n", err)
+	}
+	defer sf.Close()
+	//获取源文件的reader
+	sfReader := bufio.NewReader(sf)
+	//创建目标文件并写入内容
+	tf := createFile(targetFile)
+	defer tf.Close()
+	tfWriter := getWriter(tf)
+	io.Copy(tfWriter, sfReader)
+}
 
-	appendContent("./project21File/demo3CreateAndWrite/main/test2.txt", "current line by append option")
+func main() {
+	//createAndWriteFile("C:\\leolee\\development\\workspace\\personal\\go\\src\\golangStudyProject\\project21File\\demo3CreateAndWrite\\main\\test.txt", "LeoLee")
+	// ./并不是代表当前文件所在路径的相对路径，还是代表了goPath的相对路径
+	//createAndWriteFile(".\\project21File\\demo3CreateAndWrite\\main\\test2.txt", "Lydia")
+
+	//appendContent("./project21File/demo3CreateAndWrite/main/test2.txt", "current line by append option")
 
 	//clearFileContent("./project21File/demo3CreateAndWrite/main/test2.txt")
 
 	fmt.Printf("is exists: %t\n", checkFilePathExists("./project21File/demo3CreateAndWrite/main/test2.txt"))
+
+	copyFile("./static/img/image-20210822212446151.png", "./project21File/demo3CreateAndWrite/main/target.png")
 }
