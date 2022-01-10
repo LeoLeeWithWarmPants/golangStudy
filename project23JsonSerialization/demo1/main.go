@@ -26,10 +26,27 @@ func toJson(v interface{}) string {
 }
 
 func main() {
+	//结构体
 	person := Person{Name: "LeoLee", Age: 18}
 	student := new(Student)
 	student.BaseInfo = person
 	student.Type = 3
 	student.Grade = "大一"
 	toJson(student)
+
+	//map
+	map1 := make(map[string]interface{})
+	map1["name"] = "LeoLee"
+	map1["info"] = student
+	toJson(map1)
+
+	//切片
+	map2 := make(map[string]interface{})
+	map2["name"] = "LeoLee"
+	map2["info"] = person
+
+	var slice1 []interface{} = make([]interface{}, 2, 2)
+	slice1[0] = map2
+	slice1[1] = student
+	toJson(slice1)
 }
