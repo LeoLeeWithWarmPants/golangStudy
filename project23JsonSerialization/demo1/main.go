@@ -6,13 +6,13 @@ import (
 )
 
 type Person struct {
-	Name string
-	Age  int
+	Name string `json:"name"`
+	Age  int    `json:"age"`
 }
 
 type Student struct {
-	BaseInfo Person
-	Type     int // 1-小学生 2-中学生 3-大学生
+	BaseInfo Person `json:"baseInfo"`
+	Type     int    // 1-小学生 2-中学生 3-大学生
 	Grade    string
 }
 
