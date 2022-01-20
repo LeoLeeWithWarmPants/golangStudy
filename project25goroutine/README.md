@@ -100,6 +100,33 @@ created by main.main
 
 ![线程不安全的数据竞争检测结果2](C:\leolee\development\workspace\personal\go\src\golangStudyProject\static\img\线程不安全的数据竞争检测结果2.png)
 
+为了解决这样的问题，肯定是加锁，golang的sync包下提供了多线程同步的相关能力，其中可以使用 **sync.Mutex** 来对临界区进行加锁，类似于Java中的synchronized，属于重型锁，对于多线程高并发的访问，肯定有较大的影响。而且在demo2Thread-safe的示例中，还需要设置主线程的睡眠时间，来等待所有协程的执行完成，但是协程的执行时间很难确定。所以种种问题表明，使用 sync.Mutex 来对临界区加锁并不是一个好的办法来解决多协程并发访问共享变量的线程安全问题。
+
+## **channel**
+
+[一文了解 Go 并发模型][1] 一文中还提到了 **CSP并发模型**，golang中的 channel 就是 CSP并发模型 的具体实现。
+
+- channel的本质就是一个数据结构（队列）
+- 满足FIFO（先进先出原则）
+- 本身是线程安全，多协程访问时，不需要加锁
+- channel是有数据类型的（一个int类型的channel只能存取int类型的数据）
+
+### **定义和声明**
+
+var [变量名] chan [管道的数据类型]
+
+- channel是引用类型
+- 必须初始化才能写入数据，即使用前需要make，指定类型、size、capacity
+- channel声明时指定的数据类型规定了该channel存取时的数据类型
+- 放入管道的数据量最大为设置的容量，超过将会报错：deadlock!
+- 在没有使用协程的情况下，如果我们的管道数据已经全部取出，继续获取将会报错：deadlock!
+
+
+
+
+
+
+
 
 
 [1]: https://mp.weixin.qq.com/s?__biz=MzA5OTAyNzQ2OA==&amp;mid=2649709343&amp;idx=1&amp;sn=c4b51cf3d7dade9c799c3142dea6d06f&amp;chksm=8893647cbfe4ed6a83f4113b29b412121190cc42979e14d23b7db99af6d500c5a664c73c669c&amp;mpshare=1&amp;scene=1&amp;srcid=0711r5wHilGdt43uFZEVE5TD&amp;sharer_sharetime	"一文了解 Go 并发模型"
