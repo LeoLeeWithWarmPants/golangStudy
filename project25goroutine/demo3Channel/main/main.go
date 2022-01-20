@@ -51,4 +51,24 @@ func main() {
 	person3 := person2.(models.Person)
 	fmt.Printf("person3.Name=%v\n", person3.Name)
 
+	//channel的关闭
+	strChan := make(chan string, 2)
+	strChan <- "LeoLee"
+	close(strChan)
+	//关闭后只能读数据，不能写数据
+	str1, ok := <-strChan
+	fmt.Printf("str1=%v, ok=%v\n", str1, ok)
+	//strChan <- "Lydia" //panic: send on closed channel
+
+	//channel的遍历
+	intChan2 := make(chan int, 10)
+	for i := 0; i < 10; i++ {
+		intChan2 <- i + 1
+	}
+	//for range遍历channel没有index参数，只有value,队列并不能通过下标去取值，只能按照FIFO的顺序取值
+	//遍历时必须关闭channel，否则会出现fatal error: all goroutines are asleep - deadlock!
+	close(intChan2)
+	for v := range intChan2 {
+		fmt.Println("v", v)
+	}
 }
