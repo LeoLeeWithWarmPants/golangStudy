@@ -30,7 +30,7 @@ func readData(intDataChan chan int, exitChan chan bool) {
 //一个协程读取管道数据，一个协程向管道内写入数据
 func main() {
 	//创建数据管道与退出管道
-	intDataChan := make(chan int, 30)
+	intDataChan := make(chan int, 10) //即使容量小于写入的数据量，只要有对该管道的读操作，就不会发生dead lock
 	exitChan := make(chan bool, 1)
 
 	//写入数据(匿名写法)
