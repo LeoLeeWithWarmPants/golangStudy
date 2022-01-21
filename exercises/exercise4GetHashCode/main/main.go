@@ -55,6 +55,8 @@ func logic(strKey string, salt int32) {
 		fmt.Scanln(&continueText)
 		if strings.Compare(continueText, "666") == 0 {
 
+		} else {
+			break
 		}
 	}
 }
