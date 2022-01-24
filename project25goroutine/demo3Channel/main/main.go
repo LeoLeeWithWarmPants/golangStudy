@@ -11,6 +11,18 @@ func main() {
 	// intchan=0xc0000d4180, intchan.address=0xc0000ce018, channel是一个引用类型，inchan只是存放了channel的地址
 	fmt.Printf("intchan=%v, intchan.address=%p\n", intChan, &intChan)
 
+	//声明只写channel，在默认情况下channel是双向的，可读可写
+	var onlyWriteChan chan<- int
+	onlyWriteChan = make(chan int, 2)
+	onlyWriteChan <- 2
+	//num := <-onlyWriteChan 报错：Invalid operation: <-onlyWriteChan (receive from the send-only type chan<- int)
+
+	//声明只读channel,常用于参数声明，保证传入的channel会被正确的使用（读或者写）
+	var onlyReadChan <-chan int
+	onlyReadChan = make(chan int, 2)
+	//onlyReadChan <- 2 报错：Invalid operation: onlyReadChan <- 2 (send to the receive-only type <-chan int)
+	fmt.Println(onlyReadChan)
+
 	//向管道写入数据(写入的数据量最大不能超过初始化时候指定的容量)
 	intChan <- 1 //直接写入数据
 	num1 := 2
