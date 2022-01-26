@@ -115,17 +115,51 @@ created by main.main
 
 var [变量名] chan [管道的数据类型]
 
+```go
+//声明只写channel，在默认情况下channel是双向的，可读可写
+var onlyWriteChan chan<- int
+//声明只读channel
+var onlyReadChan <-chan int
+//只读或者只写channel，常用于函数、方法等参数声明（使用只读或者只写channel接收channel参数），保证传入的channel会被正确的使用（读或者写）
+```
+
+
+
 - channel是引用类型
 - 必须初始化才能写入数据，即使用前需要make，指定类型、size、capacity
 - channel声明时指定的数据类型规定了该channel存取时的数据类型
 - 放入管道的数据量最大为设置的容量，超过将会报错：deadlock!
-- 在没有使用协程的情况下，如果我们的管道数据已经全部取出，继续获取将会报错：deadlock!
+- **在没有使用协程的情况下**，如果我们的管道数据已经全部取出，继续获取将会报错：deadlock!
+- 在使用协程的情况下，如果管道数据已经全部取出，继续获取，将会阻塞
 - 管道关闭后只能读数据，不能写数据
 - 遍历channel必须先关闭，否则会发生：deadlock!
 
+**使用select解决从管道读取数据的阻塞或者deadlock问题(一般情况下使用的场景为不确定channel的关闭时机，但是又需要遍历管道，直接遍历将会deadlock)**
 
+```go
+intChan3 := make(chan int, 5)
+for i := 0; i < 5; i++ {
+	intChan3 <- i
+}
+strChan2 := make(chan string, 5)
+for i := 5; i < 10; i++ {
+	strChan2 <- fmt.Sprintf("str%d", i)
+}
 
-
+breakFor:
+for {
+	select {
+	// 如果intChan3一直没有关闭，也不会deadlock
+	case v := <-intChan3:
+		fmt.Printf("%d\n", v)
+	case v := <-strChan2:
+		fmt.Printf("%s\n", v)
+	default:
+		fmt.Println("都取不到数据")
+		break breakFor //跳出循环
+	}
+}
+```
 
 
 

@@ -17,7 +17,7 @@ func main() {
 	onlyWriteChan <- 2
 	//num := <-onlyWriteChan 报错：Invalid operation: <-onlyWriteChan (receive from the send-only type chan<- int)
 
-	//声明只读channel,常用于参数声明，保证传入的channel会被正确的使用（读或者写）
+	//声明只读channel,只读或者只写channel，常用于函数、方法等参数声明（使用只读或者只写channel接收channel参数），保证传入的channel会被正确的使用（读或者写）
 	var onlyReadChan <-chan int
 	onlyReadChan = make(chan int, 2)
 	//onlyReadChan <- 2 报错：Invalid operation: onlyReadChan <- 2 (send to the receive-only type <-chan int)
@@ -82,5 +82,29 @@ func main() {
 	close(intChan2)
 	for v := range intChan2 {
 		fmt.Println("v", v)
+	}
+
+	//使用select解决从管道读取数据的阻塞或者deadlock问题(一般情况下使用的场景为不确定channel的关闭时机，但是又需要遍历管道，直接遍历将会deadlock)
+	intChan3 := make(chan int, 5)
+	for i := 0; i < 5; i++ {
+		intChan3 <- i
+	}
+	strChan2 := make(chan string, 5)
+	for i := 5; i < 10; i++ {
+		strChan2 <- fmt.Sprintf("str%d", i)
+	}
+
+breakFor:
+	for {
+		select {
+		// 如果intChan3一直没有关闭，也不会deadlock
+		case v := <-intChan3:
+			fmt.Printf("%d\n", v)
+		case v := <-strChan2:
+			fmt.Printf("%s\n", v)
+		default:
+			fmt.Println("都取不到数据")
+			break breakFor //跳出循环
+		}
 	}
 }
