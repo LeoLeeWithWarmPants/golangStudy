@@ -74,5 +74,5 @@ func reflectStruct(s interface{}) {
 
 func main() {
 	a := A{Id: 10, Name: "LeoLee"}
-	reflectStruct(a)
+	reflectStruct(a) //如果传递a的指针，还可以通过反射修改字段值
 }
