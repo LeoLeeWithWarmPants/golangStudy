@@ -72,7 +72,31 @@ func reflectStruct(s interface{}) {
 	}
 }
 
+func reflectNewStruct() interface{} {
+	var (
+		a     *A
+		rType reflect.Type
+		//rValue reflect.Value
+	)
+	rType = reflect.TypeOf(a)
+	newPoint := reflect.New(rType.Elem())
+	aPoint := newPoint.Interface().(*A)
+	newPoint.Elem().FieldByName("Id").SetInt(27)
+	newPoint.Elem().FieldByName("Name").SetString("hahaha")
+	return aPoint
+}
+
 func main() {
+	//通过反射获取结构体字段和方法
 	a := A{Id: 10, Name: "LeoLee"}
 	reflectStruct(a) //如果传递a的指针，还可以通过反射修改字段值
+	fmt.Println("")
+	//通过反射创建新的结构体指针对象
+	a1 := reflectNewStruct()
+	aaa, ok := a1.(*A)
+	if ok {
+		fmt.Printf("a1 type:%T, a1.Id:%d, a1.Name:%s\n", aaa, aaa.Id, aaa.Name)
+	} else {
+		fmt.Println("类型断言异常")
+	}
 }
