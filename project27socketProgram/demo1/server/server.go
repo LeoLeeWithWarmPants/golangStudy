@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func startServer(protocol, address string, port int) {
+func StartServer(protocol, address string, port int) {
 	listener, error := net.Listen(protocol, address+":"+strconv.FormatInt(int64(port), 10))
 	defer listener.Close()
 	if error != nil {
@@ -27,6 +27,6 @@ func startServer(protocol, address string, port int) {
 }
 
 func main() {
-	startServer("tcp", "0.0.0.0", 9528)
+	StartServer("tcp", "0.0.0.0", 9528)
 	//启动后telnet 127.0.0.1 9528
 }
