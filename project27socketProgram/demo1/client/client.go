@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net"
+	"os"
 	"strconv"
 )
 
@@ -29,7 +31,22 @@ func StartClient(address string, port int, retryTimes int) {
 		//如果链接失败就结束程序
 		return
 	}
+	//发送数据到服务端
+	terminalStr := terminalInputRead()
+	//发送数据到服务端
+	_, writeErr := connection.Write([]byte(terminalStr))
+	if writeErr != nil {
+		fmt.Printf("write to server failed, root of problem is Conn.Write failed, err=%v\n", writeErr)
+	}
+}
 
+func terminalInputRead() string {
+	terminalReader := bufio.NewReader(os.Stdin) //标准输入
+	inputStr, readErr := terminalReader.ReadString('\n')
+	if readErr != nil {
+		fmt.Printf("terminal input read failed, err=%v\n", readErr)
+	}
+	return inputStr
 }
 
 func main() {

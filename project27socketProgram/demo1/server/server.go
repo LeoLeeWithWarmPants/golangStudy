@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"net"
 	"strconv"
 )
@@ -23,6 +24,29 @@ func StartServer(protocol, address string, port int) {
 		} else {
 			fmt.Printf("remote address[%v] connected success\n", conn.RemoteAddr())
 		}
+		//读取数据
+		go msgProcessor(conn)
+	}
+}
+
+func msgProcessor(conn net.Conn) {
+	//链接使用完一定要关闭
+	defer conn.Close()
+
+	for {
+		//每次读取创建一个新的缓冲区
+		readBuf := make([]byte, 1024)
+		readNum, readErr := conn.Read(readBuf) // 如果客户端没有发消息，read将会在超时时间到来之前一只阻塞
+		if readErr != nil {
+			if readErr == io.EOF {
+				fmt.Printf("remote client was closed, client address=%v\n", conn.RemoteAddr())
+			} else {
+				fmt.Printf("server read faild, client address=%v, err=%v\n", conn.RemoteAddr(), readErr)
+			}
+			break
+		}
+		//打印信息
+		fmt.Print(string(readBuf[:readNum]))
 	}
 }
 
